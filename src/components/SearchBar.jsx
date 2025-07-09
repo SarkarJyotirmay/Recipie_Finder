@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import axios from "axios";
+import { RecipieContext } from "../contexts/recipieContext";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [recipies, setRecipies] = useState([])
+  const {recipies, setRecipies} = useContext(RecipieContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +14,6 @@ const SearchBar = () => {
       `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&apiKey=${
         import.meta.env.VITE_SPOONACULAR_API_KEY
       }`
-      
     );
     console.log(response.data);
     setRecipies(response.data.results)

@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import Contactpage from "../pages/Contactpage";
 import FavouriteRecipies from "../pages/FavouriteRecipies";
+import DetailedRecipie from "../pages/DetailedRecipie";
 
 const routes = createBrowserRouter([{
     path: "/",
@@ -24,6 +25,10 @@ const routes = createBrowserRouter([{
         {
             path: "/favourite-recipies",
             element: <FavouriteRecipies />
+        },
+        {
+            path: "/recipie/:id",
+            element: <DetailedRecipie />
         },
     ]
 }])

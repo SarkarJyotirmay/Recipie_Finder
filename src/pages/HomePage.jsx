@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import SearchBar from '../components/SearchBar'
+import { RecipieContext } from '../contexts/recipieContext'
+import ShowRecipie from '../components/ShowRecipie'
 
 const HomePage = () => {
+  const {recipies} = useContext(RecipieContext)
+ 
   return (
     <>
-   <main className='border-1 py-8 px-4'>
+   <main className='py-8 px-4'>
      <SearchBar />
+     {
+      recipies.length > 0 &&
+      <ShowRecipie />
+     }
    </main>
     </>
   )
