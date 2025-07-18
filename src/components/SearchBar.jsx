@@ -2,13 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import axios from "axios";
 import { RecipieContext } from "../contexts/recipieContext";
+import { toast } from "react-toastify";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const {recipies, setRecipies} = useContext(RecipieContext)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
     console.log(searchQuery);
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&apiKey=${
@@ -17,6 +19,9 @@ const SearchBar = () => {
     );
     console.log(response.data);
     setRecipies(response.data.results)
+    } catch (error) {
+      toast.error("Something went wrong. could not fetched recipies.")
+    }
   };
 
   useEffect(()=>{

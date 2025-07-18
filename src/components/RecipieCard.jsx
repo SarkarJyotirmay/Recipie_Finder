@@ -7,21 +7,29 @@ const RecipieCard = ({ title, image, action, recipie }) => {
   const { setFavouriteRecipies } = useContext(FavouriteRecipieContext);
 
   function handleAddToFav(e, recipie) {
-    e.preventDefault();
+   try {
+     e.preventDefault();
     e.stopPropagation();
     console.log("Recipie to be added in favourites", recipie);
     setFavouriteRecipies((prev) => [...prev, recipie]);
     toast.success("Recipe added to favourites.");
+   } catch (error) {
+    toast.error("Something went wrong. Could not add recipe to favourites");
+   }
   }
 
   function handlleRemoveFromFav(e, recipie) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
     e.stopPropagation();
     console.log("Remove from fav", recipie);
     setFavouriteRecipies((prev) =>
       prev.filter((item) => item.id !== recipie.id)
     );
     toast.error("Recipe removed from favourites.");
+    } catch (error) {
+      toast.error("Something went wrong. Could not remove recipe from favourites");
+    }
   }
 
   return (
